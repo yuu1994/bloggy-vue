@@ -5,9 +5,9 @@ let getPosts = () => {
   let error = ref("");
   let loadData = async () => {
     try {
-      await new Promise((resolve,reject)=>{
-        setTimeout(resolve,2000)
-      })
+      // await new Promise((resolve,reject)=>{
+      //   setTimeout(resolve,2000)
+      // })
       let res = await fetch("http://localhost:3000/posts");
       if (res.status == 404) {
         throw new Error("Url not found ,please try again!!!");

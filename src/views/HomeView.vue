@@ -17,15 +17,17 @@
 </template>
 
 <script>
-import Spinner from '../components/Spinner'
+import Spinner from "../components/Spinner";
 import AllPosts from "../components/AllPosts";
 import getPosts from "../composable/getPosts";
 // import { computed, ref } from 'vue';
 export default {
   components: {
-    Spinner, AllPosts },
+    Spinner,
+    AllPosts,
+  },
   setup(props) {
-    let { posts, error, loadData } = getPosts();//destructring 
+    let { posts, error, loadData } = getPosts(); //destructring
 
     // let names = ref(['aung aung','kyaw kyaw','aye aye','mg mg','aung hla'])
     // let search = ref("")
@@ -42,4 +44,10 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+</style>

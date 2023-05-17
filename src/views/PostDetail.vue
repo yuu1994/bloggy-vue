@@ -1,9 +1,11 @@
 <template>
-  <h3>Detail page {{ id }}</h3>
   <div class="" v-if="error">{{ error }}</div>
-  <div class="" v-if="post">
-    <h4>{{ post.title }}</h4>
+  <div class="post" v-if="post">
+    <h2>{{ post.title }}</h2>
     <p>{{ post.detail }}</p>
+    <div class="pill" v-for="tag in post.tags" :key="tag">
+      {{ tag }}
+    </div>
   </div>
   <div class="" v-else>
     <Spinner></Spinner>
@@ -11,17 +13,58 @@
 </template>
 
 <script>
-import Spinner from '../components/Spinner'
+import Spinner from "../components/Spinner";
 import getPost from "@/composable/getPost";
+import { useRoute } from "vue-router";
 export default {
   components: { Spinner },
   props: ["id"],
-  setup(props) {
-    let { post, error, load } = getPost(props.id);
+  setup() {
+    let route = useRoute();
+    let { post, error, load } = getPost(route.params.id);
     load();
     return { post, error };
   },
 };
 </script>
 
-<style></style>
+<style>
+.post {
+  margin: 0 40px 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px dashed #e7e7e7;
+}
+.post h2 {
+  display: inline-block;
+  position: relative;
+  font-size: 26px;
+  color: white;
+  margin-bottom: 10px;
+  max-width: 400px;
+}
+.post h2::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #ff8800;
+  position: absolute;
+  z-index: -1;
+  padding-right: 40px;
+  left: -30px;
+  transform: rotateZ(-1deg);
+}
+.pill {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+  color: #444;
+  background: #ddd;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.pill a {
+  color: orangered;
+  text-decoration: none;
+}
+</style>
